@@ -34,13 +34,23 @@ app.post('/User', function (req, res, next) {
             res.status(404).send('This User ID is already being used, please try another one');
         }
         else {
-            userObj_1.UserArray.push(newUser);
-            res.status(201).send(newUser.userID + " has been added");
+            if (newUser.userID === "") {
+                res.status(404).send('There must be a User ID, please try again');
+            }
+            else {
+                userObj_1.UserArray.push(newUser);
+                res.status(201).send(newUser.userID + " has been added");
+            }
         }
     }
     else {
-        userObj_1.UserArray.push(newUser);
-        res.status(201).send(newUser.userID + " has been added");
+        if (newUser.userID === "") {
+            res.status(404).send('There must be a User ID, please try again');
+        }
+        else {
+            userObj_1.UserArray.push(newUser);
+            res.status(201).send(newUser.userID + " has been added");
+        }
     }
 });
 app.get('/User/:userID', function (req, res, next) {

@@ -33,12 +33,20 @@ app.post('/User', (req, res, next)=>{
         if(comp === 0){
             res.status(404).send('This User ID is already being used, please try another one');
         }else{
+            if(newUser.userID === ""){
+                res.status(404).send('There must be a User ID, please try again');
+            }else{
+                UserArray.push(newUser);
+                res.status(201).send(`${newUser.userID} has been added`);
+            }
+        }
+    }else{
+        if(newUser.userID === ""){
+            res.status(404).send('There must be a User ID, please try again');
+        }else{
             UserArray.push(newUser);
             res.status(201).send(`${newUser.userID} has been added`);
         }
-    }else{
-        UserArray.push(newUser);
-        res.status(201).send(`${newUser.userID} has been added`);
     }
 });
 
